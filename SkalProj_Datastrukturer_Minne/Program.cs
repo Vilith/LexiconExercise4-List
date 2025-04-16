@@ -82,11 +82,11 @@ namespace SkalProj_Datastrukturer_Minne
                 4. Så att hela listan inte måste kopieras och byggas om för varje nytt element.
                 5. Nej bara Count minskar
                 6. En array är att föredra om man inte behöver ta bort eller lägga till
-            */                        
+            */
 
-            List<string> theList = new ();
+            List<string> theList = new();
             bool isRunning = true;
-                        
+
             int cap = theList.Capacity; //Setting the lists capacity to an int for traceability.
 
             //Looping
@@ -103,22 +103,22 @@ namespace SkalProj_Datastrukturer_Minne
                 char nav = input[0];
                 string value = input.Substring(1);
 
-                
+
                 //Console.WriteLine($"Tecken: {nav}, Värde: {value}");
 
                 switch (nav)
                 {
                     case '+':
-                        theList.Add(value);                        
+                        theList.Add(value);
                         Console.WriteLine($"Added {value} to the list");
                         break;
 
                     case '-':
-                        theList.Remove(value);                        
+                        theList.Remove(value);
                         Console.WriteLine($"Removed {value} from the list");
                         break;
 
-                    case '*':                        
+                    case '*':
                         isRunning = false;
                         break;
 
@@ -142,9 +142,9 @@ namespace SkalProj_Datastrukturer_Minne
 
                 #region [Capacity - elements and capacity]
                 //Show amount of elements and the capacity
-                Console.WriteLine($"{ Environment.NewLine}Count: {theList.Count}, Capacity: {theList.Capacity}");
+                Console.WriteLine($"{Environment.NewLine}Count: {theList.Count}, Capacity: {theList.Capacity}");
                 #endregion
-                                
+
             }
         }
 
@@ -158,6 +158,27 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+            /*
+            Datastrukturen kö(implementerad i Queue-klassen) fungerar enligt Först In Först Ut
+            (FIFO) principen.Alltså att det element som läggs till först kommer vara det som tas bort
+            först.
+            1.Simulera följande kö på papper: 
+            a.ICA öppnar och kön till kassan är tom
+            b.Kalle ställer sig i kön
+            c.Greta ställer sig i kön
+            d.Kalle blir expedierad och lämnar kön
+            e.Stina ställer sig i kön
+            f.
+            Greta blir expedierad och lämnar kön
+            g.Olle ställer sig i kön
+            h.      … 
+            2.Implementera metoden ExamineQueue. Metoden ska simulera hur en kö fungerar
+            genom att tillåta användaren att ställa element i kön(enqueue) och ta bort element
+            ur kön(dequeue). Använd Queue-klassen till hjälp för att implementera metoden. 
+            Simulera sedan ICA - kön med hjälp av ditt program.
+            */
+
+
         }
 
         /// <summary>
