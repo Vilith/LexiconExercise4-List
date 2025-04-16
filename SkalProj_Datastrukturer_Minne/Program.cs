@@ -1,4 +1,6 @@
 ﻿using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Threading.Tasks;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -63,21 +65,87 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineList()
         {
             /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch statement with cases '+' and '-'
-             * '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
-             * '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
-             * In both cases, look at the count and capacity of the list
-             * As a default case, tell them to use only + or -
-             * Below you can see some inspirational code to begin working.
-            */
+            Uppgift 1:
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+                1.Skriv klart implementationen av ExamineList-metoden så att undersökningen blir genomförbar. 
+                2.När ökar listans kapacitet ? (Alltså den underliggande arrayens storlek) 
+                3.Med hur mycket ökar kapaciteten? 
+                4.Varför ökar inte listans kapacitet i samma takt som element läggs till?
+                5.Minskar kapaciteten när element tas bort ur listan? 
+                6.När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
 
-            //switch(nav){...}
+
+            Svar: 
+                
+                2. När du överskrider nuvarande kapacitet. 5 element och 4 i kapacitet innebär att kapaciteten ökar till 8.
+                3. Exponentiellt n*2
+                4. Så att hela listan inte måste kopieras och byggas om för varje nytt element.
+                5. Nej bara Count minskar
+                6. En array är att föredra om man inte behöver ta bort eller lägga till
+            */                        
+
+            List<string> theList = new ();
+            bool isRunning = true;
+                        
+            int cap = theList.Capacity; //Setting the lists capacity to an int for traceability.
+
+            //Looping
+            while (isRunning)
+            {
+                Console.WriteLine($"{Environment.NewLine}Type +text or -text to add/remove items on list" +
+                    $"{Environment.NewLine}Type * to return to mainmenu");
+
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                    break;
+
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                
+                //Console.WriteLine($"Tecken: {nav}, Värde: {value}");
+
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);                        
+                        Console.WriteLine($"Added {value} to the list");
+                        break;
+
+                    case '-':
+                        theList.Remove(value);                        
+                        Console.WriteLine($"Removed {value} from the list");
+                        break;
+
+                    case '*':                        
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine($"Input has to be either + or -");
+                        break;
+                }
+
+                #region [Capacity]
+                //Checking if the capacity has changed
+                //The capacity increases exponantially starting with 4 -> 8 -> 16 -> 32
+                //If the count is 4 and capacity is 4 it will stay at 4. Once count gets to 5 the capacity increases to 8.
+
+                //The capacity will not decrease if you remove "items" from the list
+                if (theList.Capacity != cap)
+                {
+                    Console.WriteLine($"Capacity changed: {cap} -> {theList.Capacity}");
+                    cap = theList.Capacity;
+                }
+                #endregion
+
+                #region [Capacity - elements and capacity]
+                //Show amount of elements and the capacity
+                Console.WriteLine($"{ Environment.NewLine}Count: {theList.Count}, Capacity: {theList.Capacity}");
+                #endregion
+                                
+            }
         }
 
         /// <summary>
