@@ -178,6 +178,8 @@ namespace SkalProj_Datastrukturer_Minne
             Simulera sedan ICA - kön med hjälp av ditt program.
             */
 
+            int bla = 10;
+            Console.WriteLine(bla);
 
         }
 
@@ -191,6 +193,21 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            /*
+            Stackar påminner om köer, men en stor skillnad är att stackar använder sig av Först In Sist 
+            Ut (FILO) principen. Alltså gäller att det element som stoppas in först (push) är det som 
+            kommer tas bort sist (pop).  
+            1. Simulera ännu en gång ICA-kön på papper. Denna gång med en stack. Varför är det 
+            inte så smart att använda en stack i det här fallet? 
+            2. Implementera en ReverseText-metod som läser in en sträng från användaren och 
+            med hjälp av en stack vänder ordning på teckenföljden för att sedan skriva ut den 
+            omvända strängen till användaren.
+            */
+
+
+
+
         }
 
         static void CheckParanthesis()
@@ -200,6 +217,26 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+            /*
+            Ni bör nu ha tillräckliga kunskaper om ovannämnda datastrukturer för att lösa följande 
+            problem. 
+            Vi säger att en sträng är välformad om alla parenteser som öppnas även stängs korrekt. 
+            Att en parentes öppnas och stängs korrekt dikteras av följande regler: 
+            • ), }, ] får enbart förekomma efter respektive (, {, [ 
+            • Varje parentes som öppnas måste stängas dvs ”(” följs av ”)” 
+            Exempelvis är ([{}]({})) välformad men inte ({)}. Vidare kan en sträng innehålla andra tecken, 
+            t ex är ”List<int> lista = new List<int>(){2, 3, 4};” välformad. Vi bryr oss alltså endast om 
+            parenteser! 
+            1. Skapa med hjälp av er nya kunskap funktionalitet för att kontrollera en välformad 
+            sträng på papper. Du ska använda dig av någon eller några av de datastrukturer vi 
+            precis gått igenom. Vilken datastruktur använder du?  
+            2. Implementera funktionaliteten i metoden CheckParentheses. Låt programmet läsa 
+            in en sträng från användaren och returnera ett svar som reflekterar huruvida 
+            strängen är välformad eller ej.   
+            */
+
+
 
         }
 
