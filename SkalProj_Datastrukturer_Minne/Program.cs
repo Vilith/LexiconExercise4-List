@@ -1,6 +1,8 @@
 ﻿using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Threading.Tasks;
+using System.ComponentModel.Design;
+using System.Xml.Linq;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -153,34 +155,85 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineQueue()
         {
+
             /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch with cases to enqueue items or dequeue items
-             * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
-            */
-            /*
-            Datastrukturen kö(implementerad i Queue-klassen) fungerar enligt Först In Först Ut
-            (FIFO) principen.Alltså att det element som läggs till först kommer vara det som tas bort
-            först.
-            1.Simulera följande kö på papper: 
-            a.ICA öppnar och kön till kassan är tom
-            b.Kalle ställer sig i kön
-            c.Greta ställer sig i kön
-            d.Kalle blir expedierad och lämnar kön
-            e.Stina ställer sig i kön
-            f.
-            Greta blir expedierad och lämnar kön
-            g.Olle ställer sig i kön
-            h.      … 
-            2.Implementera metoden ExamineQueue. Metoden ska simulera hur en kö fungerar
-            genom att tillåta användaren att ställa element i kön(enqueue) och ta bort element
-            ur kön(dequeue). Använd Queue-klassen till hjälp för att implementera metoden. 
-            Simulera sedan ICA - kön med hjälp av ditt program.
+            Uppgift 2:
+                1. Simulera på papper. Gör en lättare skiss flödesdiagram?
+                2. Implementera kod för att simulera kön med queue. 
+
+            Svar:
+                1. Bifogar bild gjord på draw.io
+                2. Kod finnes nedan.
             */
 
-            int bla = 10;
-            Console.WriteLine(bla);
 
+            Queue<string> queue = new();
+            bool queueRunning = true;
+
+            //While loop for adding and removing customers from queue for as long as queueRunning is true.
+            while (queueRunning)
+            {
+
+                Console.WriteLine($"{Environment.NewLine}Write +name to add a person to queue, - to remove from queue." +
+                    $"{Environment.NewLine}Type * to go back to main menu.");
+                string input = Console.ReadLine();
+
+                //If input is null or empty the loop should return to mainmenu 
+                //if (string.IsNullOrEmpty(input))
+                //  break;
+
+                char nav = input[0];
+                string value = input.Substring(1);
+
+                switch (nav)
+                {
+                    case '+':
+
+                        queue.Enqueue(value);
+                        Console.WriteLine($"{value} are now in the queue.");
+                        Console.WriteLine($"{Environment.NewLine}Current queue: " + string.Join(", ", queue));
+                        break;
+
+
+                    case '-':
+                        if (queue.Count > 0)
+                        {
+                            string removed = queue.Dequeue();
+                            Console.WriteLine($"{removed} has been removed from the queue.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Queue seems to be empty, nothing to remove");
+                        }
+                        Console.WriteLine($"{Environment.NewLine}Current queue: " + string.Join(", ", queue));
+                        break;
+
+
+                    case '*':
+
+                        Console.WriteLine("Store shutting down");
+
+                        if (queue.Count > 0)
+                        {
+                            Console.WriteLine($"Clearing queue from {queue.Count} person(s).");
+                            queue.Clear();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Queue were already empty.");
+                        }
+
+                        Console.WriteLine("Queue is now: (empty)");
+                        queueRunning = false;
+                        break;
+
+
+                    default:
+                        Console.WriteLine($"Input has to be either + or -");
+                        break;
+
+                }
+            }
         }
 
         /// <summary>
@@ -204,6 +257,19 @@ namespace SkalProj_Datastrukturer_Minne
             med hjälp av en stack vänder ordning på teckenföljden för att sedan skriva ut den 
             omvända strängen till användaren.
             */
+
+            /*
+            Uppgift 3:
+                1. Simulera på papper. Gör en lättare skiss flödesdiagram?
+                2. Implementera kod för att simulera kön med stack.
+
+            Svar:
+                1. Bifogar bild gjord på draw.io
+                2. Kod finnes nedan
+
+            */
+
+
 
 
 
@@ -236,6 +302,15 @@ namespace SkalProj_Datastrukturer_Minne
             strängen är välformad eller ej.   
             */
 
+            /*
+            Uppgift 4:
+                1. Simulera på papper. Gör en lättare skiss flödesdiagram?
+                2. Implementera kod för att simulera kön med stack.
+
+            Svar:
+                1.
+                2.
+            */
 
 
         }
