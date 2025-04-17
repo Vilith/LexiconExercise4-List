@@ -64,6 +64,8 @@ namespace SkalProj_Datastrukturer_Minne
         /// <summary>
         /// Examines the datastructure List
         /// </summary>
+
+        #region [ExamineList]
         static void ExamineList()
         {
             /*
@@ -149,10 +151,13 @@ namespace SkalProj_Datastrukturer_Minne
 
             }
         }
+        #endregion
 
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
+
+        #region [ExamineQueue]
         static void ExamineQueue()
         {
 
@@ -235,10 +240,13 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
         }
+        #endregion
 
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
+
+        #region [ExamineStack]
         static void ExamineStack()
         {
             /*
@@ -261,21 +269,107 @@ namespace SkalProj_Datastrukturer_Minne
             /*
             Uppgift 3:
                 1. Simulera på papper. Gör en lättare skiss flödesdiagram?
-                2. Implementera kod för att simulera kön med stack.
+                2. Varför är det inte smart att använda en stack till detta fallet?                
+                3. Implementera kod för att simulera kön med stack.
 
             Svar:
                 1. Bifogar bild gjord på draw.io
-                2. Kod finnes nedan
+                2. Är man först i kön till kassan, så ska man expedieras först också.
+                3. Kod finnes nedan.
 
             */
 
+            Stack<string> stack = new();
+            bool examineRunning = true;
+
+            while (examineRunning)
+            {
+                Console.WriteLine($"{Environment.NewLine}Write +name to push a person onto the stack" +
+                    $"{Environment.NewLine}Write - to pop (remove) the last one." +
+                    $"{Environment.NewLine}Write < to reverse a string" +
+                    $"{Environment.NewLine}Write * to return to main menu.");
+
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(input))
+                    break;
+
+                char nav = input[0];
+                string value = input.Length > 1 ? input.Substring(1) : "";
+
+                switch (nav)
+                {
+
+                    case '+':
+
+                        stack.Push(value);
+                        Console.WriteLine($"{value} pushed to the stack.");
+                        break;
 
 
+                    case '-':
+
+                        if (stack.Count > 0)
+                        {
+                            string popped = stack.Pop();
+                            Console.WriteLine($"{popped} was popped from the stack.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Stack seems to be empty. There is nothing to pop.");
+                        }
+                        break;
 
 
+                    case '<':
+
+                        ReverseText();
+                        break;
+
+
+                    case '*':
+
+                        Console.WriteLine("Store shutting down");
+                        examineRunning = false;
+                        break;
+
+
+                    default:
+                        Console.WriteLine($"Invalid input. Use +  -  !  or  *");
+                        break;
+
+                }
+            }
 
         }
+        
 
+        static void ReverseText()
+        {
+            Console.WriteLine($"Input text to be reversed: ");
+            string input = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("No input entered.");
+                return;
+            }
+
+            Stack<char> stack = new();
+
+            foreach (char c in input)
+                stack.Push(c);
+
+            string reversed = "";
+            while (stack.Count > 0)
+                reversed += stack.Pop();
+
+            Console.WriteLine($"You wrote: {input}" +
+                $"{Environment.NewLine}Reversed: {reversed}");
+        }
+        #endregion
+
+        #region [CheckParanthesis]
         static void CheckParanthesis()
         {
             /*
@@ -314,7 +408,7 @@ namespace SkalProj_Datastrukturer_Minne
 
 
         }
-
+        #endregion
     }
 }
 
