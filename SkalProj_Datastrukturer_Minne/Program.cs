@@ -8,10 +8,104 @@ namespace SkalProj_Datastrukturer_Minne
 {
     class Program
     {
+
+        #region [Question 1-3]
+        /*
+         
+        Frågor: 
+            1. Hur fungerar stacken och heapen? Förklara gärna med exempel eller skiss på dess 
+               grundläggande funktion 
+            2. Vad är Value Types respektive Reference Types och vad skiljer dem åt? 
+            3. Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den 
+               andra returnerar 4, varför? 
+
+        public int ReturnValue()
+        {
+            int x = new int();
+            x = 3;
+            int y = new int();
+            y = x;
+            y = 4;
+            return x;
+        }
+
+        public int ReturnValue2()
+        {
+            MyInt x = new MyInt();
+            x.MyValue = 3;
+            MyInt y = new MyInt();
+            y = x;
+            y.MyValue = 4;
+            return x.MyValue;
+        }
+    ------------------------------------------------------------------------------------------------------------------------------------------
+        Svar: 
+            1 - 3:        
+                Stacken - lagrar i första hand värdetyper (Value types) som: int, double, bool, char. 
+                Datan lagras bara tills metoden är färdig, sen är den ett minne blott.
+                
+                Heapen - lagrar referenstyper (Reference types) som: class, string, list<>, Array (Allt som skapas med "new")
+                Datan lagras tills den inte längre används (Tacka de kunniga för Garbage Collector).
+        
+                Exempel:
+                        Class person
+                        {
+                            public string Name;
+                        }
+                        void MainMethod()
+                        {
+                            int age = 30;                       // Läggs på stacken
+                            Person person = new Person();       // person-referensen = stacken, Objektet läggs på heapen
+                            person.Name = "Ernst";              // "Kalle" läggs på heapen  
+                        }
+
+
+               Den första av metoderna i fråga 3 returnerar 3 för att "int" är en värdetyp.
+               "int x" och "int y" är varsin separat låda. Ändrar man värdet på y-lådan så berör det inte x-lådan och vice-versa.
+
+         3
+        ---
+       | x |   = Lådans värde är 3
+        ---
+
+        y = x;
+        
+         3
+        ---
+       | y |   = Lådans värde är 3
+        ---
+        
+        y = 4;  = Låda y har nu värde 4.
+
+
+         3
+        ---
+       | x |   = Lådans värde är fortsatt 3 då den aldrig ändrats.
+        ---
+
+
+
+
+
+               Den andra returnerar 4 för att MyInt i detta fallet är en referenstyp.
+               När vi sätter y = x, så pekar y på samma objekt som x.
+        
+         MyInt x = new() { x.MyValue=3};
+
+               [x] -------------> [3]
+                                   ↑
+                                   ↑
+             y = x;                ↑
+               [y]-----------------↑
+        Så vi ändrar helt "enkelt" värdet på lådan både x och y pekar på. (Båda pekar på samma adress i minnet)
+        */
+        #endregion
         /// <summary>
         /// The main method, vill handle the menues for the program
         /// </summary>
         /// <param name="args"></param>
+
+        #region [Main Menu]
         static void Main()
         {
 
@@ -27,6 +121,7 @@ namespace SkalProj_Datastrukturer_Minne
                 try
                 {
                     input = Console.ReadLine()![0]; //Tries to set input to the first char in an input line
+
                 }
                 catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
                 {
@@ -60,6 +155,7 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
         }
+        #endregion
 
         /// <summary>
         /// Examines the datastructure List
@@ -85,7 +181,7 @@ namespace SkalProj_Datastrukturer_Minne
                 3. Exponentiellt n*2
                 4. Så att hela listan inte måste kopieras och byggas om för varje nytt element.
                 5. Nej bara Count minskar
-                6. En array är att föredra om man inte behöver ta bort eller lägga till
+                6. En array är att föredra om man vet hur stor listan är i förhand
             */
 
             List<string> theList = new();
@@ -249,23 +345,7 @@ namespace SkalProj_Datastrukturer_Minne
         #region [ExamineStack]
         static void ExamineStack()
         {
-            /*
-             * Loop this method until the user inputs something to exit to main menue.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
-            */
-
-            /*
-            Stackar påminner om köer, men en stor skillnad är att stackar använder sig av Först In Sist 
-            Ut (FILO) principen. Alltså gäller att det element som stoppas in först (push) är det som 
-            kommer tas bort sist (pop).  
-            1. Simulera ännu en gång ICA-kön på papper. Denna gång med en stack. Varför är det 
-            inte så smart att använda en stack i det här fallet? 
-            2. Implementera en ReverseText-metod som läser in en sträng från användaren och 
-            med hjälp av en stack vänder ordning på teckenföljden för att sedan skriva ut den 
-            omvända strängen till användaren.
-            */
-
+            
             /*
             Uppgift 3:
                 1. Simulera på papper. Gör en lättare skiss flödesdiagram?
@@ -342,7 +422,7 @@ namespace SkalProj_Datastrukturer_Minne
             }
 
         }
-        
+
 
         static void ReverseText()
         {
@@ -402,10 +482,45 @@ namespace SkalProj_Datastrukturer_Minne
                 2. Implementera kod för att simulera kön med stack.
 
             Svar:
-                1.
+                1. Jag har valt att använda mig av Stack för att spara alla tecken till char och för a
                 2.
             */
+                      
 
+            Console.WriteLine($"Enter a string to confirm if it's wellformed:");
+            string input = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine($"Input is empty or whitespace.");
+                return;
+            }
+                       
+            Stack<char> stack = new();
+            Dictionary<char, char> match = new()
+            {
+                { '(', ')' },
+                { '[', ']' },
+                { '{', '}' }
+            };
+
+            foreach (char c in input)
+            {
+                if (match.Values.Contains(c))
+                {
+                    stack.Push(c);
+                }
+                else if (match.ContainsKey(c))
+                {
+                    if (stack.Count == 0 || stack.Pop() != match[c])
+                    {
+                        Console.WriteLine($"The string is formed ??");
+                        return;
+                    }
+                }
+            }
+
+            Console.WriteLine(stack.Count == 0 ? "The string is well-formed" : "The string is not well-formed");
 
         }
         #endregion
